@@ -10,4 +10,4 @@ https://github.com/bonitoo-io/micrometer/blob/influxdb2-workaround/samples/micro
 
 https://grafana.com/grafana/dashboards/6756-spring-boot-statistics/
 
-https://docs.influxdata.com/influxdb/v2.0/tools/grafana/
+https://qainsights.com/jmeter-integration-with-influxdb-2-0/
