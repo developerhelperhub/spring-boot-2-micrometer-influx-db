@@ -1,4 +1,4 @@
-### Spring Boot  + Micrometer + InfluxDB 
+### Spring Boot  + Micrometer + InfluxDB + Grafana
 
 This repo contains the sample code which helps how to collect the spring boot application metrics for monitoring.
 
@@ -6,6 +6,7 @@ This repo contains the sample code which helps how to collect the spring boot ap
 - Micrometer
 - Influx DB 2
 - My SQL
+- Grafana
 - Docker
 
 We have to run and configure the service to run this application
@@ -56,9 +57,33 @@ influx v1 dbrp create \
   --default
 
 ```
+#### Grafana
 
-Start the spring boot application
+Start the Grafana
 
-We can login into influx dashboard in this URL http://localhost:8086/onboarding/1. We can able to see the bucket name which "my-bucket" in the data/buckets section
+```bash 
+
+docker run -d --name=grafana -p 3000:3000 grafana/grafana
+
+```
+### Configure Data Source Influx DB in Grafana
+1. Select Datasource menu
+2. Choose the Influx DB datasource
+3. Give the name of datasource "Influx DB"
+4. Select the query language is "InfluxQL"
+5. Give the URL is "http://host.docker.internal:8086"
+6. Add custom header, header name is "Authorization" and value is "Token my-super-secret-auth-token"
+7. Database is "my-app-db"
+8. User is "my-user"
+9. Password is "my-password"
+10. HTTP method is "Get"
+11. Click the save and test button
+
+#### Dashboards
+
+1. Start the spring boot application
+2. We can login into influx dashboard in this URL http://localhost:8086/onboarding/1. We can able to see the bucket name which "my-app-bucket" in the data/buckets section
+3. We can login into grafana dashboard in this URL http://localhost:3000. The grafana template is available in the source and the file name is "Spring Boot Metrics-*.json". This template can be imported and monitor the application. 
+ 
  
 
